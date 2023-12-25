@@ -34,11 +34,6 @@ class Web3Client(Web3, metaclass=Meta):
         self.eth.default_account = self.acc.address
         return self
 
-    @classmethod
-    def __getitem__(cls, item):
-        print("xxxxxxx")
-        pass
-
     def with_mev(self, blox_token: str):
         rk = random_account()
         signer = Account.from_key(rk.key)
@@ -58,3 +53,6 @@ class Web3Client(Web3, metaclass=Meta):
         return WsClient(
             self.config["node"]["ws"], ["logs", {"address": address, "topics": topics}]
         )
+
+if __name__ =="__main__":
+    print(Web3Client['ethereum'])

@@ -11,6 +11,12 @@ configs = {
             "ws": "wss://eth-hk1.csnodes.com/ws/v1/973eeba6738a7d8c3bd54f91adcbea89",
         },
     },
+    "bsc": {
+        "node": {
+            "rpc": "https://bsc-dataseed1.binance.org",
+            "ws": "",
+        },
+    },
     "arb": {
         "node": {
             # "rpc": "https://arb-mainnet.g.alchemy.com/v2/7FWmkZwir8-miybmueaw9Nd-hHu0rOO3",
