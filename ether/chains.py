@@ -16,6 +16,7 @@ configs = {
             "rpc": "https://bsc-dataseed1.binance.org",
             "ws": "",
         },
+        "is_poa": True
     },
     "arb": {
         "node": {

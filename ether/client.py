@@ -2,7 +2,8 @@ from eth_account import Account
 from web3 import Web3
 from ether.chains import configs
 from ether.utils import random_account
-from web3.middleware import construct_sign_and_send_raw_middleware
+from web3.middleware import construct_sign_and_send_raw_middleware,geth_poa_middleware 
+
 
 from ether.ws import WsClient
 from ether.flashbots import flashbot
@@ -23,6 +24,9 @@ class Web3Client(Web3, metaclass=Meta):
                 chain_config["node"]["rpc"], request_kwargs=request_kwargs
             )
         )
+        # bsc
+        if chain_config.get('is_poa'):
+            self.middleware_onion.inject(geth_poa_middleware, layer=0)
         self.config = chain_config
         self.w3 = self
         if pk:
