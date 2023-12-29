@@ -10,8 +10,3 @@ class Wallet:
             return [Account.from_mnemonic(self.mnemonic,account_path=f"m/44'/60'/0'/0/{i}") for i in range(index.start,index.stop)]
         else:
             return Account.from_mnemonic(self.mnemonic,account_path=f"m/44'/60'/0'/0/{index}")
-
-
-if __name__ == '__main__':
-    w = Wallet('')
-    print([ i.address for i in w[0:3]])
