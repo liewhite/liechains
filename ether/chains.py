@@ -16,7 +16,7 @@ configs = {
             "rpc": "https://bsc-dataseed1.binance.org",
             "ws": "",
         },
-        "is_poa": True
+        "is_poa": True,
     },
     "arb": {
         "node": {
@@ -29,15 +29,27 @@ configs = {
         "node": {
             # "rpc": "https://mainnet.era.zksync.io",
             "rpc": "https://mainnet.era.zksync.io",
-            "ws": "wss://mainnet.era.zksync.io/ws",  
+            "ws": "wss://mainnet.era.zksync.io/ws",
         },
     },
     "zkFair": {
         "node": {
             # "rpc": "https://mainnet.era.zksync.io",
             "rpc": "https://rpc.zkfair.io",
-            "ws": "",  
+            "ws": "",
         },
+    },
+    "avax": {
+        "node": {
+            "rpc": "https://avalanche-mainnet.core.chainstack.com/ext/bc/C/rpc/021e382ae670cdb8a3b413c463d57763",
+            "ws": "wss://avalanche-mainnet.core.chainstack.com/ws/ext/bc/C/ws/021e382ae670cdb8a3b413c463d57763",
+        }
+    },
+    "manta": {
+        "node": {
+            "rpc": "https://pacific-rpc.manta.network/http",
+            "ws": "wss://pacific-rpc.manta.network/ws",
+        }
     },
 }
 
