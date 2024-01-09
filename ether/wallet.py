@@ -1,6 +1,7 @@
 import json
 from eth_account import Account
 from web3 import Web3
+from eth_account.signers.local import LocalAccount
 
 
 class Wallet:
@@ -16,7 +17,7 @@ class Wallet:
         mn = Account.decrypt(data, password).decode()
         return Wallet(mn)
 
-    def __getitem__(self, index):
+    def __getitem__(self, index) -> list[LocalAccount]:
         if isinstance(index, slice):
             return [
                 Account.from_mnemonic(self.mnemonic, account_path=f"m/44'/60'/0'/0/{i}")
