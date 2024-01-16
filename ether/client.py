@@ -1,8 +1,9 @@
 from eth_account import Account
 from web3 import Web3
 from ether.chains import configs
+from ether.middlewares.remote_signer import signer_middleware
 from ether.utils import random_account
-from web3.middleware import construct_sign_and_send_raw_middleware,geth_poa_middleware 
+from web3.middleware import construct_sign_and_send_raw_middleware, geth_poa_middleware
 
 
 from ether.ws import WsClient
@@ -25,7 +26,7 @@ class Web3Client(Web3, metaclass=Meta):
             )
         )
         # bsc
-        if chain_config.get('is_poa'):
+        if chain_config.get("is_poa"):
             self.middleware_onion.inject(geth_poa_middleware, layer=0)
         self.config = chain_config
         self.w3 = self
@@ -36,6 +37,10 @@ class Web3Client(Web3, metaclass=Meta):
         self.acc = self.eth.account.from_key(private_key)
         self.middleware_onion.add(construct_sign_and_send_raw_middleware(self.acc))
         self.eth.default_account = self.acc.address
+        return self
+
+    def with_signer(self, url, pubkey):
+        self.middleware_onion.add(signer_middleware(self, url, pubkey))
         return self
 
     def with_mev(self, blox_token: str):
@@ -58,5 +63,6 @@ class Web3Client(Web3, metaclass=Meta):
             self.config["node"]["ws"], ["logs", {"address": address, "topics": topics}]
         )
 
-if __name__ =="__main__":
-    print(Web3Client['ethereum'])
+
+if __name__ == "__main__":
+    print(Web3Client["ethereum"])
