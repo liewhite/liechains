@@ -1,7 +1,9 @@
 from eth_account import Account
+from eth_account.signers.local import LocalAccount
+
 from web3 import Web3
 from ether.chains import configs
-from ether.middlewares.remote_signer import signer_middleware
+from ether.middlewares.remote_signer import RemoteSigner, signer_middleware
 from ether.utils import random_account
 from web3.middleware import construct_sign_and_send_raw_middleware, geth_poa_middleware
 
@@ -17,6 +19,11 @@ class Meta(type):
 
 
 class Web3Client(Web3, metaclass=Meta):
+    # with signer
+    signer: RemoteSigner
+    # with account
+    acc: LocalAccount
+
     def __init__(
         self, chain_config=configs["ethereum"], pk=None, request_kwargs=None
     ) -> None:
@@ -40,7 +47,9 @@ class Web3Client(Web3, metaclass=Meta):
         return self
 
     def with_signer(self, url, pubkey):
+        signer = RemoteSigner(self.eth.chain_id, url, pubkey)
         self.middleware_onion.add(signer_middleware(self, url, pubkey))
+        self.signer = signer
         return self
 
     def with_mev(self, blox_token: str):
