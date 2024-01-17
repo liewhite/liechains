@@ -278,7 +278,6 @@ class RemoteSigner:
             account=address,
             transaction=transaction_str,
         )
-        print(param)
 
         body = self.encrypt_body(param)
         host = self.host + self.SIGNER_SIGN_TRANSACTION
