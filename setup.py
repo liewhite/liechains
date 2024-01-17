@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="liechains",
-    version="0.2.5",
+    version="0.2.6",
     author="leeliewhite",
     author_email="leeliewhite@gmail.com",
     description="toolkit for blockchains",
