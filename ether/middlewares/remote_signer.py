@@ -1,3 +1,4 @@
+import logging
 from typing import Callable
 from web3.types import *
 from web3.middleware.signing import *
@@ -50,6 +51,10 @@ def signer_middleware(w3: Web3, url: str, pubkey: str) -> Middleware:
                 transaction['type'] = '0x1'
             else:
                 transaction['type'] = '0x0'
+            if 'data' in transaction:
+                logging.warning(f"use input instead of data in tx dict: {transaction}")
+                transaction['input'] = transaction['data']
+                transaction.pop('data')
             
             result = signer.sign_transaction(fm, transaction)
             return make_request(RPCEndpoint("eth_sendRawTransaction"), [result['hex']])
