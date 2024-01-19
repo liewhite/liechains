@@ -5,6 +5,12 @@ configs = {
             "ws": "ws://localhost:8545",
         },
     },
+    "goerli": {
+        "node": {
+            "rpc": "https://ethereum-goerli.publicnode.com",
+            "ws": "wss://ethereum-goerli.publicnode.com",
+        },
+    },
     "ethereum": {
         "node": {
             "rpc": "https://eth-hk1.csnodes.com/v1/973eeba6738a7d8c3bd54f91adcbea89",
