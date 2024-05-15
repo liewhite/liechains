@@ -12,7 +12,7 @@ PoolInitCodeV3 = Web3.to_bytes(hexstr="0xe34f199b19b2b4f47f68442619d555527d244f7
 PoolInitCodeV2 = Web3.to_bytes(hexstr="0x96e8ac4277198ff8b6f785478aa9a39f403cb768dd02cbee326c3e7da348845f")
 
 # 计算v2 v3 pool 地址, 抢开盘需要
-def sort_addrs(addr1: str, addr2: str) -> (str,str):
+def sort_addrs(addr1: str, addr2: str) -> tuple[str,str]:
     b1 = Web3.to_bytes(hexstr=addr1)
     b2 = Web3.to_bytes(hexstr=addr2)
     return (addr1, addr2) if b1 < b2 else (addr2,addr1)
