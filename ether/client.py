@@ -3,6 +3,7 @@ from eth_account.signers.local import LocalAccount
 
 from web3 import Web3
 from ether.chains import configs
+from ether.middlewares.argus import argus_middleware
 from ether.middlewares.remote_signer import RemoteSigner, signer_middleware
 from ether.utils import random_account
 from web3.middleware import construct_sign_and_send_raw_middleware, geth_poa_middleware
@@ -44,6 +45,11 @@ class Web3Client(Web3, metaclass=Meta):
         self.acc = self.eth.account.from_key(private_key)
         self.middleware_onion.add(construct_sign_and_send_raw_middleware(self.acc))
         self.eth.default_account = self.acc.address
+        return self
+
+    def with_argus(self, module_addr):
+        mw = argus_middleware(module_addr)
+        self.middleware_onion.add(mw)
         return self
 
     def with_signer(self, url, pubkey):
