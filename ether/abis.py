@@ -4492,3 +4492,7 @@ uniswap_v3_router = json.loads('''[
     "type": "receive"
   }
 ]''')
+
+argus = json.loads(
+    '[{"inputs": [{"components": [{"internalType": "uint256", "name": "flag", "type": "uint256"}, {"internalType": "address", "name": "to", "type": "address"}, {"internalType": "uint256", "name": "value", "type": "uint256"}, {"internalType": "bytes", "name": "data", "type": "bytes"}, {"internalType": "bytes", "name": "hint", "type": "bytes"}, {"internalType": "bytes", "name": "extra", "type": "bytes"}], "internalType": "struct CallData", "name": "callData", "type": "tuple"}], "name": "execTransaction", "outputs": [{"components": [{"internalType": "bool", "name": "success", "type": "bool"}, {"internalType": "bytes", "name": "data", "type": "bytes"}, {"internalType": "bytes", "name": "hint", "type": "bytes"}], "internalType": "struct TransactionResult", "name": "result", "type": "tuple"}], "stateMutability": "nonpayable", "type": "function"}]'
+)

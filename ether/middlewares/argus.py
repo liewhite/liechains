@@ -21,9 +21,8 @@ import requests
 import json
 from web3 import Web3
 
-argus_abi = json.loads(
-    '[{"inputs": [{"components": [{"internalType": "uint256", "name": "flag", "type": "uint256"}, {"internalType": "address", "name": "to", "type": "address"}, {"internalType": "uint256", "name": "value", "type": "uint256"}, {"internalType": "bytes", "name": "data", "type": "bytes"}, {"internalType": "bytes", "name": "hint", "type": "bytes"}, {"internalType": "bytes", "name": "extra", "type": "bytes"}], "internalType": "struct CallData", "name": "callData", "type": "tuple"}], "name": "execTransaction", "outputs": [{"components": [{"internalType": "bool", "name": "success", "type": "bool"}, {"internalType": "bytes", "name": "data", "type": "bytes"}, {"internalType": "bytes", "name": "hint", "type": "bytes"}], "internalType": "struct TransactionResult", "name": "result", "type": "tuple"}], "stateMutability": "nonpayable", "type": "function"}]'
-)
+from ether import abis
+
 
 
 def argus_middleware(module_addr: str) -> Middleware:
@@ -39,7 +38,7 @@ def argus_middleware(module_addr: str) -> Middleware:
             # value写入了data, 交易里不会带有value
             value = transaction.get("value", 0)
             transaction['value'] = 0
-            argus = w3.eth.contract(module_addr, abi=argus_abi)
+            argus = w3.eth.contract(module_addr, abi=abis.argus)
             data = argus.encodeABI(
                 fn_name="execTransaction",
                 args=({
