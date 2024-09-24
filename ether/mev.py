@@ -13,7 +13,7 @@ providers = [
     "https://api.securerpc.com/v1",
     "https://BuildAI.net",
     "https://rpc.lokibuilder.xyz",
-    "https://rpc.lightspeedbuilder.info",
+    "https://rpc.lightspeedbuilder.info/",
     "https://rpc.payload.de",
     "https://rpc.f1b.io",
 ]
