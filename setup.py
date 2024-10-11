@@ -13,7 +13,7 @@ setup(
         "Operating System :: OS Independent",
     ],
     install_requires=[
-        "web3",
+        "web3==v5.31.4",
         "websocket-client",
         "cryptography",
         "cobo_waas2"

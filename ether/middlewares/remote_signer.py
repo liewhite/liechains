@@ -20,6 +20,7 @@ from cryptography.hazmat.primitives import padding
 import requests
 import json
 from web3 import Web3
+from web3.middleware import Middleware
 
 
 def signer_middleware(w3: Web3, url: str, pubkey: str) -> Middleware:
