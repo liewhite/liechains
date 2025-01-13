@@ -14,7 +14,7 @@ FLASHBOTS_METHODS = [
 
 
 def construct_flashbots_middleware(
-    flashbots_providers: list[FlashbotProvider],
+    flashbots_provider: FlashbotProvider,
 ) -> Middleware:
     """Captures Flashbots RPC requests and sends them to the Flashbots endpoint
     while also injecting the required authorization headers
@@ -31,14 +31,8 @@ def construct_flashbots_middleware(
             if method not in FLASHBOTS_METHODS:
                 return make_request(method, params)
             else:
-                with ThreadPoolExecutor(len(flashbots_providers)) as pool:
-                    result = list(
-                        pool.map(
-                            lambda provider: provider.make_request(method, params),
-                            flashbots_providers,
-                        )
-                    )
-                    return {"jsonrpc": "2.0", "id": 0, "result": result}
+                result = flashbots_provider.make_request(method,params)
+                return {"jsonrpc": "2.0", "id": 0, "result": result}
 
         return middleware
 

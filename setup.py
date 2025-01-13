@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="liechains",
-    version="0.4.2",
+    version="0.4.8",
     author="leeliewhite",
     author_email="leeliewhite@gmail.com",
     description="toolkit for blockchains",
@@ -13,7 +13,7 @@ setup(
         "Operating System :: OS Independent",
     ],
     install_requires=[
-        "web3==v5.31.4",
+        "web3<=6.15.1",
         "websocket-client",
         "cryptography",
         "cobo_waas2"

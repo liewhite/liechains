@@ -77,7 +77,6 @@ class FlashbotsBundleResponse:
         return self.w3.keccak(concat_hashes)
 
 
-
 class Flashbots(Module):
     signed_txs: List[HexBytes]
     response: FlashbotsBundleResponse
@@ -179,12 +178,32 @@ class Flashbots(Module):
                 "blockNumber": hex(target_block_number),
                 "minTimestamp": opts["minTimestamp"] if "minTimestamp" in opts else 0,
                 "maxTimestamp": opts["maxTimestamp"] if "maxTimestamp" in opts else 0,
-                "revertingTxHashes": opts["revertingTxHashes"]
-                if "revertingTxHashes" in opts
-                else [],
-                "replacementUuid": opts["replacementUuid"]
-                if "replacementUuid" in opts
-                else None,
+                "revertingTxHashes": (
+                    opts["revertingTxHashes"] if "revertingTxHashes" in opts else []
+                ),
+                "replacementUuid": (
+                    opts["replacementUuid"] if "replacementUuid" in opts else None
+                ),
+                "builders": [
+                    "flashbots",
+                    "f1b.io",
+                    "rsync",
+                    "beaverbuild.org",
+                    "builder0x69",
+                    "Titan",
+                    "EigenPhi",
+                    "boba-builder",
+                    "Gambit Labs",
+                    "payload",
+                    "Loki",
+                    "BuildAI",
+                    "JetBuilder",
+                    "tbuilder",
+                    "penguinbuild",
+                    "bobthebuilder",
+                    "BTCS",
+                    "bloXroute",
+                ],
             }
         ]
 
@@ -215,7 +234,6 @@ class Flashbots(Module):
     )
     send_bundle = sendBundle
 
-
     def extrapolate_timestamp(self, block_tag: int, latest_block_number: int):
         block_delta = block_tag - latest_block_number
         if block_delta < 0:
@@ -223,7 +241,6 @@ class Flashbots(Module):
         return self.w3.eth.get_block(latest_block_number)["timestamp"] + (
             block_delta * SECONDS_PER_BLOCK
         )
-
 
 
 def _parse_signed_tx(signed_tx: HexBytes) -> TxParams:

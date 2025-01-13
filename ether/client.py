@@ -58,10 +58,10 @@ class Web3Client(Web3, metaclass=Meta):
         self.signer = signer
         return self
 
-    def with_mev(self, blox_token: str):
+    def with_mev(self):
         rk = random_account()
         signer = Account.from_key(rk.key)
-        flashbot(self, signer, blox_token, providers)
+        flashbot(self, signer)
         return self
 
     def nonce(self):
